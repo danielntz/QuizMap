@@ -70,18 +70,12 @@ public class QuizGridViewAdapter extends BaseAdapter {
         else{
               viewHolder =  (ViewHolder) convertView.getTag();
          }
-        //返回数据
-        if(clean == 0) {
-            //添加bitmap数据
-            viewHolder.smallphotoshow.setImageBitmap(smallphoto.get(position).getMbitmap());
-        }
-        else{
-            //清楚bitmap数据
-            PitcureUtils.cleanImageView(viewHolder.smallphotoshow);
-            clean = 0;
-            Log.i("TAG","uuuu");
-        }
-        Log.i("TAG", smallphoto.get(position).getMbitmap().getWidth() + "" +smallphoto.get(position).getMbitmap().getHeight());
+
+        //先判断释放资源，再装载资源
+       // PitcureUtils.cleanImageView(viewHolder.smallphotoshow);
+        viewHolder.smallphotoshow.setImageBitmap(smallphoto.get(position).getMbitmap());
+
+       // Log.i("TAG", smallphoto.get(position).getMbitmap().getWidth() + "" +smallphoto.get(position).getMbitmap().getHeight());
         return convertView;
     }
 }

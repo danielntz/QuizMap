@@ -13,4 +13,6 @@ public class InitViewActivity extends SingleActivity {
     public Fragment createFrament() {
         return new InitViewFragment();
     }
+
+
 }

@@ -18,12 +18,15 @@ import com.example.danieljet.quizmap.QuziViewActivity;
 import com.example.danieljet.quizmap.R;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import Adapter.QuizGridViewAdapter;
 import Data.CollectData;
 import Pitcure.Genrate;
 import Pitcure.ImagesUtil;
+import Pitcure.ItemBean;
 import Pitcure.PitcureUtils;
 
 /**
@@ -36,13 +39,15 @@ public class QuizViewFragment extends Fragment{
       private   Bitmap  bitmap ;        //选择的拼图
       private   ImageView quizphoto;
       private   GridView  gridView1,gridView2,gridView3;
-      private QuizGridViewAdapter quizadapter;
+      private   QuizGridViewAdapter quizadapter;
       private  int  w;
       private  int  h;
       private  int  W;
       private  int  H;
       private BitmapDrawable  bitmapDrawable;
       private Bitmap bitmap1;
+      private List<ItemBean> nullitembean = new ArrayList<ItemBean>();
+
      //用来保存其它Fragment传过来的值
       public static  QuizViewFragment  newInstance(int position , int level){
 
@@ -73,6 +78,7 @@ public class QuizViewFragment extends Fragment{
             new Genrate().getPuzzleGenerator();
             quizadapter = new QuizGridViewAdapter(getContext(), QuziViewActivity.itemBeanList);
             gridView1.setAdapter(quizadapter);
+
         }
         if(level == 3){
             new ImagesUtil().createInitBitmaps(level, bitmap, getContext());
@@ -80,6 +86,7 @@ public class QuizViewFragment extends Fragment{
             new Genrate().getPuzzleGenerator();
             quizadapter = new QuizGridViewAdapter(getContext(), QuziViewActivity.itemBeanList);
             gridView2.setAdapter(quizadapter);
+
         }
         if(level == 4){
             new ImagesUtil().createInitBitmaps(level, bitmap, getContext());
@@ -87,6 +94,7 @@ public class QuizViewFragment extends Fragment{
             new Genrate().getPuzzleGenerator();
             quizadapter = new QuizGridViewAdapter(getContext(), QuziViewActivity.itemBeanList);
             gridView3.setAdapter(quizadapter);
+
         }
 
            return  view;
@@ -102,9 +110,27 @@ public class QuizViewFragment extends Fragment{
     @Override
     public void onPause() {
         super.onPause();
-        //释放图片资源
-        quizadapter.shifang();
-        Log.i("TAG","sdf");
+        if(level == 2)
+        {
+            QuziViewActivity.itemBeanList.clear();   //把集合清空
+            quizadapter = new QuizGridViewAdapter(getContext(),QuziViewActivity.itemBeanList);
+            //把GridView刷新成空的
+            gridView1.setAdapter(quizadapter);
+            Log.i("TAG","rrr");
+
+        }else if(level == 3){
+            QuziViewActivity.itemBeanList.clear();   //把集合清空
+            quizadapter = new QuizGridViewAdapter(getContext(),QuziViewActivity.itemBeanList);
+            //把GridView刷新成空的
+            gridView2.setAdapter(quizadapter);
+            Log.i("TAG","rrr");
+        }else{
+            QuziViewActivity.itemBeanList.clear();   //把集合清空
+            quizadapter = new QuizGridViewAdapter(getContext(),QuziViewActivity.itemBeanList);
+            //把GridView刷新成空的
+            gridView3.setAdapter(quizadapter);
+            Log.i("TAG","rrr");
+        }
     }
 
     @Override
@@ -115,5 +141,7 @@ public class QuizViewFragment extends Fragment{
     @Override
     public void onDestroy() {
         super.onDestroy();
+
+
     }
 }

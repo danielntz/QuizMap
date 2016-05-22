@@ -11,7 +11,7 @@ import android.widget.ImageView;
 
 /**
  * Created by Danieljet on 2016/5/10.
- * 图片处理类，将图片缩小至设备屏幕默认的大小,当图片过大时会造成内存泄漏out of memory
+ * 图片处理类，将图片按比例缩放,当图片过大时会造成内存泄漏out of memory
  * int rid  处理的图片的资源ID
  */
 public class PitcureUtils  {
@@ -45,7 +45,8 @@ public class PitcureUtils  {
              }
          }
          options = new BitmapFactory.Options();
-         options.inSampleSize = insampleSize;
+        // options.inSampleSize = insampleSize;
+           options.inSampleSize = 4;
          Bitmap bitmap = BitmapFactory.decodeResource(a.getResources(),rid,options);
          Log.i("TAG",bitmap.getWidth() +  "" + bitmap.getHeight() );  //缩小后的图片大小(应该跟屏幕大小一样)
          return new BitmapDrawable(a.getResources(),bitmap);
@@ -54,12 +55,18 @@ public class PitcureUtils  {
      }
    //卸载图片
     public  static void cleanImageView(ImageView view){
-         if(! (view.getDrawable() instanceof  BitmapDrawable))
-          return;
-         //清楚ImageView中的占用的内存
-         BitmapDrawable b = (BitmapDrawable)view.getDrawable();
-         b.getBitmap().recycle(); //清楚BitmapDrawable
-         view.setImageDrawable(null);
+
+             if(view.getDrawable() == null)
+                 return ;
+        // if(! (view.getDrawable() instanceof  BitmapDrawable))
+        //  return;
+        else {
+                 //清楚ImageView中的占用的内存
+                 BitmapDrawable b = (BitmapDrawable) view.getDrawable();
+                 b.getBitmap().recycle(); //清楚BitmapDrawable
+                 view.setImageDrawable(null);
+             }
+         Log.i("TAG", "uuuu");
 
     }
 
@@ -95,9 +102,9 @@ public class PitcureUtils  {
         options.inJustDecodeBounds = false;
         Bitmap bitmap = BitmapFactory.decodeResource(a.getResources(),rid,options);
         Log.i("TAG",options.outWidth +"" + options.outHeight);
-        Log.i("TAG",bitmap.getWidth() +  "" + bitmap.getHeight() );  //缩小后的图片大小(应该跟屏幕大小一样)
-        bitmap1 = Bitmap.createScaledBitmap(bitmap,480,800,true);
-        Log.i("TAG",bitmap1.getWidth() +  "" + bitmap1.getHeight() );  //缩小后的图片大小(应该跟屏幕大小一样)
+        Log.i("TAG",bitmap.getWidth() +  "" + bitmap.getHeight() );  //缩小后的图片大小(应该跟屏幕大小一样)按比例
+        bitmap1 = Bitmap.createScaledBitmap(bitmap,480,650,true);    //把图片拉伸为至屏幕大小
+        Log.i("TAG",bitmap1.getWidth() +  "" + bitmap1.getHeight() );//缩小后的图片大小(应该跟屏幕大小一样)
         return  bitmap1;
 
 
