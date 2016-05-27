@@ -9,7 +9,7 @@ import android.graphics.Bitmap;
 public class ItemBean {
 
        private int ItemId;   //小图片Id
-       private int BitmapId; //所属图片Id
+       private int BitmapId; //所属图片Id，用来判断是否拼图成功
        private Bitmap  mbitmap; //小图片
        public  ItemBean(){
 

@@ -34,7 +34,7 @@ public class  Genrate   {
         }
         //判断生成的无序图片是否有解
         if(canSolve(data)){
-            Log.i("TAG","sdfsdf");
+            Log.i("TAG","分割成功");
 
         }
         else{

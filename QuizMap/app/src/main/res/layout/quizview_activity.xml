@@ -19,7 +19,7 @@
            android:id="@+id/time_show"
            android:layout_toRightOf="@id/show_time"
            android:layout_marginLeft="5dip"
-           android:text="10"
+
            android:textSize="20sp"
            />
 
@@ -36,7 +36,7 @@
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:id="@+id/step_show"
-           android:text="10"
+
            android:layout_marginLeft="5dip"
            android:layout_toRightOf="@id/show_step"
            android:textSize="20sp"

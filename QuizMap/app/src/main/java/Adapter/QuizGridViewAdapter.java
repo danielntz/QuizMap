@@ -25,6 +25,7 @@ public class QuizGridViewAdapter extends BaseAdapter {
       private Context context;
       private LayoutInflater inflater;
       private  List<ItemBean> smallphoto = new ArrayList<ItemBean>();
+      private  List<ItemBean> bigphoto = new ArrayList<ItemBean>();
       private  ViewHolder  viewHolder;
       private  int   clean = 0 ;  //用来做判断是否清楚bitmap资源的标志
      static  class  ViewHolder{
@@ -58,6 +59,10 @@ public class QuizGridViewAdapter extends BaseAdapter {
          clean = 1;
         notifyDataSetChanged();   //重新调用getView方法
 
+    }
+    public void refresh(List<ItemBean> update){
+         this.bigphoto = update;
+         notifyDataSetChanged();
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
